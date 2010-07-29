@@ -1,0 +1,49 @@
+Linux
+-----
+
+Build shared:
+
+	cd php_opengl/glut
+	phpize ; ./configure && make install
+	cd ../opengl
+	phpize ; ./configure && make install
+
+Don't forget to use either 
+
+	extension=opengl.so
+	extension=glut.so
+
+in PHP.INI *or*
+
+	dl('opengl.so');
+	dl('glut.so');
+
+in your script.
+
+
+Build static:
+
+Copy 'glut' and 'opengl' to php4/ext/, delete the php4/configure file
+and generate a new one with ./buildconf. Then compile with
+'--with-opengl --with-glut'. You can optionally specify a base
+directory for your opengl/glut installation:
+
+cp -a glut opengl php4/ext
+cd php4
+rm configure
+./buildconf
+./configure --with-opengl --with-glut
+
+
+
+Windows
+-------
+
+Included are MSVC *.dsp files. Copy them to your local PHP4 copy
+to the php4\ext\ directory. Open them and compile for your build
+target (Release_TS most of the time). You'll end up with
+php_opengl.dll and php_glut.dll in php4\Release_TS. Copy them to
+a directory where PHP can find it.
+
+You'll also need GLUT for Windows available from
+http://www.xmission.com/~nate/glut.html .

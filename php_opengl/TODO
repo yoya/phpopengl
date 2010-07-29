@@ -1,0 +1,10 @@
+*) Add support for Nurbs and Quadric callbacks
+   test new tess callbacks more
+
+*) Fix all glGet*() functions to know how many elements are going
+   to be in the array
+
+*) Provide backwards compatibility
+
+*) Fix crash in php_array_to_c_array() when used with
+   gluNurbsSurface()
