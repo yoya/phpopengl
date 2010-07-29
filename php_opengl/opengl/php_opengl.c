@@ -48,10 +48,20 @@
 char *glget_mask = NULL;
 unsigned int glget_max = 0;
 
+
 // Used for glSelectBuffer
 GLuint *select_buffer = NULL;
 unsigned long select_buffer_size = 0;
 
+/* yoya customize */
+/* {{{ arginfo */
+#ifdef ZEND_ENGINE_2
+#define force_ref_first_arg  NULL
+#define force_ref_second_arg NULL
+#define force_ref_third_arg  NULL
+#define force_ref_fourth_arg NULL
+#define force_ref_ninth_arg  NULL
+#else
 static unsigned char force_ref_first_arg[] =
 {1, BYREF_FORCE};
 
@@ -66,6 +76,8 @@ static unsigned char force_ref_fourth_arg[] =
 
 static unsigned char force_ref_ninth_arg[] =
 {9, BYREF_NONE,  BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_FORCE};
+#endif
+/* }}} */
 
 function_entry opengl_functions[] = {
 	// GL Functions
