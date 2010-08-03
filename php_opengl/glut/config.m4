@@ -22,7 +22,7 @@ if test "$PHP_GLUT" != "no"; then
     GLUT_DIR=$PHP_GLUT
   else
     AC_MSG_CHECKING(for GLUT development files in default path)
-    for i in /usr/local /usr; do
+    for i in /usr/X11R6 /usr/local /usr; do
       if test -r $i/include/GL/glut.h; then
         GLUT_DIR=$i
         AC_MSG_RESULT(found in $i)
