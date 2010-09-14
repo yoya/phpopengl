@@ -496,7 +496,7 @@ zend_module_entry opengl_module_entry = {
 	opengl_functions, 
 	PHP_MINIT(opengl), 
 	PHP_MSHUTDOWN(opengl), 
-	NULL,
+	PHP_RINIT(opengl),
 	PHP_RSHUTDOWN(opengl),
 	PHP_MINFO(opengl),
 #if ZEND_MODULE_API_NO >= 20010901
@@ -5812,28 +5812,25 @@ PHP_MINIT_FUNCTION(opengl)
 #endif
 	REGISTER_LONG_CONSTANT("GL_LOGIC_OP", GL_LOGIC_OP , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GL_TEXTURE_COMPONENTS", GL_TEXTURE_COMPONENTS , CONST_CS | CONST_PERSISTENT);
+}
 
+PHP_RINIT_FUNCTION(opengl)
+{
 	// initialize other modules
 	glu_init(module_number);
 
 #ifdef PHP_OPENGL_OSMESA
 	osmesa_init(module_number);
 #endif
-	
-	return SUCCESS;
-}
-
-PHP_MSHUTDOWN_FUNCTION(opengl)
-{
 	return SUCCESS;
 }
 
 PHP_RSHUTDOWN_FUNCTION(opengl)
 {
-	if (select_buffer != NULL)
+	if (select_buffer != NULL) {
 		efree(select_buffer);
-	if (glget_mask != NULL)
-		efree(glget_mask);
+                select_buffer = NULL;
+	}
 
 	// shutdown other modules
 	glu_request_shutdown();
@@ -5841,6 +5838,14 @@ PHP_RSHUTDOWN_FUNCTION(opengl)
 #ifdef PHP_OPENGL_OSMESA
 	osmesa_request_shutdown();
 #endif
+
+	return SUCCESS;
+}
+
+PHP_MSHUTDOWN_FUNCTION(opengl)
+{
+	if (glget_mask != NULL)
+		efree(glget_mask);
 
 	return SUCCESS;
 }

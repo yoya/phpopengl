@@ -37,6 +37,7 @@ extern zend_module_entry opengl_module_entry;
 
 PHP_MINIT_FUNCTION(opengl);
 PHP_MSHUTDOWN_FUNCTION(opengl);
+PHP_RINIT_FUNCTION(opengl);
 PHP_RSHUTDOWN_FUNCTION(opengl);
 PHP_MINFO_FUNCTION(opengl);
 
