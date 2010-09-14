@@ -142,7 +142,7 @@ zend_module_entry glut_module_entry = {
 	glut_functions, 
 	PHP_MINIT(glut), 
 	PHP_MSHUTDOWN(glut),
-	NULL,
+       	PHP_RINIT(glut),
 	PHP_RSHUTDOWN(glut),
 	PHP_MINFO(glut),
 #if ZEND_MODULE_API_NO >= 20010901
@@ -303,7 +303,10 @@ PHP_MINIT_FUNCTION(glut)
 	//GLUT Stroke Constants
 	REGISTER_LONG_CONSTANT("GLUT_STROKE_ROMAN", (long)GLUT_STROKE_ROMAN , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GLUT_STROKE_MONO_ROMAN", (long)GLUT_STROKE_MONO_ROMAN , CONST_CS | CONST_PERSISTENT);
-		
+}
+
+PHP_RINIT_FUNCTION(glut)
+{
 	call_backs = (HashTable*)emalloc(sizeof(HashTable));
 	zend_hash_init(call_backs, 0, NULL, ZVAL_PTR_DTOR, 0);
 	menu_callbacks = (HashTable*)emalloc(sizeof(HashTable));

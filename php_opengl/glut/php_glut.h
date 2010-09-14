@@ -37,6 +37,7 @@ extern zend_module_entry glut_module_entry;
 
 PHP_MINIT_FUNCTION(glut);
 PHP_MSHUTDOWN_FUNCTION(glut);
+PHP_RINIT_FUNCTION(glut);
 PHP_RSHUTDOWN_FUNCTION(glut);
 PHP_MINFO_FUNCTION(glut);
 
