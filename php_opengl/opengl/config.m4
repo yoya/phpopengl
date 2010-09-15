@@ -95,7 +95,7 @@ if test "$PHP_OPENGL" != "no"; then
   if test -r $OPENGL_DIR/include/GL/osmesa.h; then
   	AC_DEFINE(PHP_OPENGL_OSMESA, 1, [Whether we support OSMesa])
 	AC_MSG_RESULT(yes)
-	PHP_ADD_LIBRARY_WITH_PATH(MesaOS, $OPENGL_DIR/lib, OPENGL_SHARED_LIBADD)
+	PHP_ADD_LIBRARY_WITH_PATH(OSMesa, $OPENGL_DIR/lib, OPENGL_SHARED_LIBADD)
   else
     AC_MSG_RESULT(no)
   fi
