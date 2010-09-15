@@ -248,7 +248,7 @@
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		if ($pickmode == TRUE) {
-			glGetIntegerv(GL_VIEWPORT, &$viewport); /* Get the viewport bounds */
+			glGetIntegerv(GL_VIEWPORT, $viewport); /* Get the viewport bounds */
 			gluPickMatrix($x,$viewport[3]-$y,3.0,3.0,$viewport);
 		}
 		gluPerspective(70.0,          /* Field of view */
