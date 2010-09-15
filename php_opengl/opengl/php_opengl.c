@@ -56,11 +56,39 @@ unsigned long select_buffer_size = 0;
 /* yoya customize */
 /* {{{ arginfo */
 #ifdef ZEND_ENGINE_2
-#define force_ref_first_arg  NULL
-#define force_ref_second_arg NULL
-#define force_ref_third_arg  NULL
-#define force_ref_fourth_arg NULL
-#define force_ref_ninth_arg  NULL
+ZEND_BEGIN_ARG_INFO_EX(force_ref_first_arg, 1, 0, 1)
+    ZEND_ARG_INFO(1, arg1)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(force_ref_second_arg, 1, 0, 2)
+    ZEND_ARG_INFO(0, arg1)
+    ZEND_ARG_INFO(1, arg2)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(force_ref_third_arg, 1, 0, 3)
+    ZEND_ARG_INFO(0, arg1)
+    ZEND_ARG_INFO(0, arg2)
+    ZEND_ARG_INFO(1, arg3)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(force_ref_fourth_arg, 1, 0, 4)
+    ZEND_ARG_INFO(0, arg1)
+    ZEND_ARG_INFO(0, arg2)
+    ZEND_ARG_INFO(0, arg3)
+    ZEND_ARG_INFO(1, arg4)
+ZEND_END_ARG_INFO()
+
+ZEND_BEGIN_ARG_INFO_EX(force_ref_ninth_arg, 1, 0, 9)
+    ZEND_ARG_INFO(0, arg1)
+    ZEND_ARG_INFO(0, arg2)
+    ZEND_ARG_INFO(0, arg3)
+    ZEND_ARG_INFO(0, arg4)
+    ZEND_ARG_INFO(0, arg5)
+    ZEND_ARG_INFO(0, arg6)
+    ZEND_ARG_INFO(0, arg7)
+    ZEND_ARG_INFO(0, arg8)
+    ZEND_ARG_INFO(1, arg9)
+ZEND_END_ARG_INFO()
 #else
 static unsigned char force_ref_first_arg[] =
 {1, BYREF_FORCE};
