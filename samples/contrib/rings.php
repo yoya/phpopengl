@@ -1,17 +1,22 @@
 <?
-define(M_PI,3.14159265);
-define(MENU_STARTOVER,0);
-define(MENU_STOP_RINGS,1);
-define(MENU_STOP_FADE,2);
-define(MENU_START_RINGS,3);
-define(MENU_START_FADE,4);
-define(MENU_QUIT,5);
-define(NOTALLOWED,0);
-define(CONE,1);
-define(TORUS,2);
-define(INNERMAT,3);
-define(OUTTERMAT,4);
-define(STEPS,30);
+
+// http://www.opengl.org/resources/code/samples/glut_examples/contrib/rings.c
+
+
+define('MENU_STARTOVER',0);
+define('MENU_ZOOM_OUT', 1);
+define('MENU_STOP_RINGS',2);
+define('MENU_STOP_FADE',3);
+define('MENU_START_RINGS',4);
+define('MENU_START_FADE',5);
+define('MENU_QUIT',5);
+define('NOTALLOWED',0);
+define('CONE',1);
+define('TORUS',2);
+define('INNERMAT',3);
+define('OUTTERMAT',4);
+define('STEPS',30);
+
 
 $Fade = 1;   /* Start moving out */
 
@@ -217,7 +222,7 @@ function handlemenu($value)
 
 function MenuInit()
 {
-  glutCreateMenu(handlemenu);
+  glutCreateMenu('handlemenu');
   glutAddMenuEntry("Start Over", MENU_STARTOVER);
   glutAddMenuEntry("Zoom Out", MENU_ZOOM_OUT);
   glutAddMenuEntry("Stop rings", MENU_STOP_RINGS);
@@ -229,7 +234,7 @@ function MenuInit()
 function vis($visible)
 {
   if ($visible == GLUT_VISIBLE) {
-      glutIdleFunc(myidle);
+      glutIdleFunc('myidle');
   } else {
       glutIdleFunc(NULL);
   }
@@ -246,9 +251,9 @@ myglInit();
 MakeDisplayLists();
 MenuInit();
 
-glutReshapeFunc(myreshape);
-glutDisplayFunc(mydisplay);
-glutVisibilityFunc(vis);
+glutReshapeFunc('myreshape');
+glutDisplayFunc('mydisplay');
+glutVisibilityFunc('vis');
 
 glutMainLoop();
 ?>
