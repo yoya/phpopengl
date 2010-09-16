@@ -61,9 +61,9 @@ glutInitWindowSize (500, 500);
 glutInitWindowPosition (100, 100);
 glutCreateWindow($argv[0]);
 init ();
-glutDisplayFunc(display);
-glutReshapeFunc(reshape);
-glutKeyboardFunc(keyboard);
+glutDisplayFunc('display');
+glutReshapeFunc('reshape');
+glutKeyboardFunc('keyboard');
 glutMainLoop();
 
 ?>
