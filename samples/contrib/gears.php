@@ -63,7 +63,7 @@ function gear($nt,$wd,$ir,$or,$tp,$tip,$ns,$ip)
         flat_face($ip[$k]->rad * $ir, $ir, $ip[$k]->wid * $wd);
 
         /* now draw side to match tooth rim */
-        if ($ip[$k]->$wid < 1.0) {
+        if ($ip[$k]->wid < 1.0) {
           draw_inside($ip[$k]->wid * $wd, $wd, $ir);
         } else {
           draw_outside($ip[$k]->wid * $wd, $wd, $ir);
@@ -143,7 +143,7 @@ function tooth_side($nt,$ir,$or,$tp,$tip,$wd)
       $na = 1.0 / sqrt($aa * $aa + $ba * $ba);
       $aa = $aa * $na;
       $ba = $ba * $na;
-      glNormal3f($b, -$a, 0.0);
+      glNormal3f($ba, -$aa, 0.0);
     }
     glBegin(GL_TRIANGLE_STRIP);
     glVertex3f($x[1], $y[1], -$wd / 2);
@@ -371,7 +371,7 @@ function myReshape($w,$h)
 function visibility($status)
 {
   if ($status == GLUT_VISIBLE) {
-    glutIdleFunc(oneFrame);
+    glutIdleFunc('oneFrame');
   } else {
     glutIdleFunc(NULL);
   }
@@ -452,10 +452,10 @@ glutInitWindowPosition(100, 100);
 glutInitWindowSize(640, 480);
 glutCreateWindow($argv[0]);
 myinit();
-glutReshapeFunc(myReshape);
-glutDisplayFunc(display);
-glutKeyboardFunc(keys);
-glutVisibilityFunc(visibility);
+glutReshapeFunc('myReshape');
+glutDisplayFunc('display');
+glutKeyboardFunc('keys');
+glutVisibilityFunc('visibility');
 glutPostRedisplay();
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 glutMainLoop();
