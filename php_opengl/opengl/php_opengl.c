@@ -5023,7 +5023,7 @@ PHP_MINIT_FUNCTION(opengl)
 		if (glget_const[i] > glget_max)
 				glget_max = glget_const[i];
 
-	glget_mask = (char*)emalloc((glget_max+1) * sizeof(char));
+	glget_mask = (char*)malloc((glget_max+1) * sizeof(char));
 
 	for (i = 0; i < glget_max; i++)
 		glget_mask[i] = -1;
@@ -5840,12 +5840,15 @@ PHP_MINIT_FUNCTION(opengl)
 #endif
 	REGISTER_LONG_CONSTANT("GL_LOGIC_OP", GL_LOGIC_OP , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GL_TEXTURE_COMPONENTS", GL_TEXTURE_COMPONENTS , CONST_CS | CONST_PERSISTENT);
+
+	return SUCCESS;
 }
 
 PHP_RINIT_FUNCTION(opengl)
 {
 	// initialize other modules
 	glu_init(module_number);
+	return SUCCESS;
 
 #ifdef PHP_OPENGL_OSMESA
 	osmesa_init(module_number);
@@ -5873,7 +5876,7 @@ PHP_RSHUTDOWN_FUNCTION(opengl)
 PHP_MSHUTDOWN_FUNCTION(opengl)
 {
 	if (glget_mask != NULL)
-		efree(glget_mask);
+		free(glget_mask);
 
 	return SUCCESS;
 }
