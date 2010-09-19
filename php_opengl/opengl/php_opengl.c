@@ -5023,7 +5023,7 @@ PHP_MINIT_FUNCTION(opengl)
 		if (glget_const[i] > glget_max)
 				glget_max = glget_const[i];
 
-	glget_mask = (char*)malloc((glget_max+1) * sizeof(char));
+	glget_mask = (char*)pemalloc((glget_max+1) * sizeof(char), 1);
 
 	for (i = 0; i < glget_max; i++)
 		glget_mask[i] = -1;
@@ -5876,7 +5876,7 @@ PHP_RSHUTDOWN_FUNCTION(opengl)
 PHP_MSHUTDOWN_FUNCTION(opengl)
 {
 	if (glget_mask != NULL)
-		free(glget_mask);
+		pefree(glget_mask, 1);
 
 	return SUCCESS;
 }
