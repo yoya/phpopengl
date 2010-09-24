@@ -1,11 +1,11 @@
 <?
 
-define(TORUS,0);
-define(TEAPOT,1);
-define(DOD,2);
-define(TET,3);
-define(ISO,4);
-define(QUIT,5);
+define('TORUS',0);
+define('TEAPOT',1);
+define('DOD',2);
+define('TET',3);
+define('ISO',4);
+define('QUIT',5);
 
 $spin = 0;
 $obj = TORUS;
@@ -174,18 +174,18 @@ glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
 glutInitWindowSize(500, 500);
 glutCreateWindow($argv[0]);
 myinit();
-glutMouseFunc(movelight);
-glutMotionFunc(motion);
-glutReshapeFunc(myReshape);
-glutDisplayFunc(display);
-glutTabletMotionFunc(tmotion);
-glutTabletButtonFunc(tbutton);
-glutSpaceballMotionFunc(smotion);
-glutSpaceballRotateFunc(rmotion);
-glutSpaceballButtonFunc(sbutton);
-glutDialsFunc(dials);
-glutButtonBoxFunc(buttons);
-glutCreateMenu(menu_select);
+glutMouseFunc('movelight');
+glutMotionFunc('motion');
+glutReshapeFunc('myReshape');
+glutDisplayFunc('display');
+glutTabletMotionFunc('tmotion');
+glutTabletButtonFunc('tbutton');
+glutSpaceballMotionFunc('smotion');
+glutSpaceballRotateFunc('rmotion');
+glutSpaceballButtonFunc('sbutton');
+glutDialsFunc('dials');
+glutButtonBoxFunc('buttons');
+glutCreateMenu('menu_select');
 glutAddMenuEntry("Torus", TORUS);
 glutAddMenuEntry("Teapot", TEAPOT);
 glutAddMenuEntry("Dodecahedron", DOD);
