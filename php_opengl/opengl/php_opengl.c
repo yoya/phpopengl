@@ -347,6 +347,7 @@ function_entry opengl_functions[] = {
 	PHP_FE(glrasterpos4sv,NULL)
 	PHP_FE(glreadbuffer,NULL)
 	PHP_FE(glreadpixels,NULL)
+	PHP_FE(glreadpixels_yoya,NULL)
 	PHP_FE(glrectd,NULL)
 	PHP_FE(glrectdv,NULL)
 	PHP_FE(glrectf,NULL)
@@ -3663,6 +3664,25 @@ PHP_FUNCTION(glreadpixels)
 	convert_to_array(pixels);
 	v_pixels = php_array_to_long_array(pixels);
 	glReadPixels((int)Z_LVAL_P(x),(int)Z_LVAL_P(y),(int)Z_LVAL_P(width),(int)Z_LVAL_P(height),(int)Z_LVAL_P(format),(int)Z_LVAL_P(type),v_pixels);
+}
+// }}}
+
+// {{{ void glreadpixels_yoya(long x, long y, long width, long height, long format)
+PHP_FUNCTION(glreadpixels_yoya)
+{
+	zval *x, *y, *width, *height, *format, *type, *pixels;
+	GLvoid *v_pixels;
+        int v_pixels_length;
+	FIVE_PARAM(x, y, width, height, format);
+	convert_to_long(x);
+	convert_to_long(y);
+	convert_to_long(width);
+	convert_to_long(height);
+	convert_to_long(format);
+        v_pixels_length = 4 * (int)Z_LVAL_P(width) * (int)Z_LVAL_P(height);
+	v_pixels = (GLvoid *) emalloc(v_pixels_length);
+	glReadPixels((int)Z_LVAL_P(x),(int)Z_LVAL_P(y),(int)Z_LVAL_P(width),(int)Z_LVAL_P(height),(int)Z_LVAL_P(format),GL_UNSIGNED_BYTE,v_pixels);
+        RETURN_STRINGL(v_pixels, v_pixels_length, 0);
 }
 // }}}
 

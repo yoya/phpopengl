@@ -281,6 +281,7 @@ PHP_FUNCTION(glrasterpos4s);
 PHP_FUNCTION(glrasterpos4sv);
 PHP_FUNCTION(glreadbuffer);
 PHP_FUNCTION(glreadpixels);
+PHP_FUNCTION(glreadpixels_yoya);
 PHP_FUNCTION(glrectd);
 PHP_FUNCTION(glrectdv);
 PHP_FUNCTION(glrectf);
