@@ -1,4 +1,4 @@
-<?
+<?php
 
 // http://www.opengl.org/resources/code/samples/glut_examples/contrib/rings.c
 
@@ -256,4 +256,3 @@ glutDisplayFunc('mydisplay');
 glutVisibilityFunc('vis');
 
 glutMainLoop();
-?>

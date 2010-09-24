@@ -1,4 +1,4 @@
-<?
+<?php
 
 if (defined('M_PI') === false) {
   define('M_PI',3.14159265);
@@ -462,5 +462,3 @@ glutVisibilityFunc('visibility');
 glutPostRedisplay();
 glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 glutMainLoop();
-?>
- 

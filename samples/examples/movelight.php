@@ -1,4 +1,4 @@
-<?
+<?php
 
 define('TORUS',0);
 define('TEAPOT',1);
@@ -194,5 +194,3 @@ glutAddMenuEntry("Icosahedron", ISO);
 glutAddMenuEntry("Quit", QUIT);
 glutAttachMenu(GLUT_RIGHT_BUTTON);
 glutMainLoop();
-
-?>

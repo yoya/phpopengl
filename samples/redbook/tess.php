@@ -128,4 +128,3 @@
 	glutDisplayFunc('display');
 	glutReshapeFunc('reshape');
 	glutMainLoop();
-?>

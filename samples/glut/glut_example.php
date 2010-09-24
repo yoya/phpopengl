@@ -419,5 +419,3 @@ Key Strokes and Menus:
 USAGE;
 			exit;
 		}
-
-?>

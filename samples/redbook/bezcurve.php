@@ -1,4 +1,4 @@
-<?
+<?php
 $ctrlpoints = array(-4.0, -4.0, 0.0 ,-2.0, 4.0, 0.0,2.0, -4.0, 0.0,4.0, 4.0, 0.0);
 
 function init()
@@ -65,5 +65,3 @@ glutDisplayFunc('display');
 glutReshapeFunc('reshape');
 glutKeyboardFunc('keyboard');
 glutMainLoop();
-
-?>
