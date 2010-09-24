@@ -1,5 +1,8 @@
 <?
-define(M_PI,3.14159265);
+
+if (defined('M_PI') === false) {
+  define('M_PI',3.14159265);
+}
 
 $gear_profile = array(new Profile(0.000, 0.0),new Profile(0.300, 7.0),new Profile(0.340, 0.4),new Profile(0.550, 0.64),new Profile(0.600, 0.4),new Profile(0.950, 1.0));
 
