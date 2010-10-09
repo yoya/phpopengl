@@ -5861,14 +5861,15 @@ PHP_MINIT_FUNCTION(opengl)
 	REGISTER_LONG_CONSTANT("GL_LOGIC_OP", GL_LOGIC_OP , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GL_TEXTURE_COMPONENTS", GL_TEXTURE_COMPONENTS , CONST_CS | CONST_PERSISTENT);
 
+	glu_init(module_number);
+
 	return SUCCESS;
 }
 
 PHP_RINIT_FUNCTION(opengl)
 {
 	// initialize other modules
-	glu_init(module_number);
-	return SUCCESS;
+	glu_request_init(module_number);
 
 #ifdef PHP_OPENGL_OSMESA
 	osmesa_init(module_number);

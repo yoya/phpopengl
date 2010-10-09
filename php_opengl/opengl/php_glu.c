@@ -1086,17 +1086,6 @@ void glutesselator_destructor(zend_rsrc_list_entry *tesselator TSRMLS_DC)
 
 int glu_init(int module_number)
 {
-	TSRMLS_FETCH();
-
-	tess_callbacks = (HashTable*)emalloc(sizeof(HashTable));
-	zend_hash_init(tess_callbacks, 0, NULL, ZVAL_PTR_DTOR, 0);
-	tess_stack = (HashTable*)emalloc(sizeof(HashTable));
-	zend_hash_init(tess_stack, 0, NULL, NULL, 0);
-
-	le_quad = zend_register_list_destructors_ex(gluquadric_destructor, NULL, le_quad_name, module_number);
-	le_nurb = zend_register_list_destructors_ex(glunurbs_destructor, NULL, le_nurb_name, module_number);
-	le_tess = zend_register_list_destructors_ex(glutesselator_destructor, NULL, le_tess_name, module_number);
-
 	// GLU_1_2
 	REGISTER_LONG_CONSTANT("GLU_VERSION_1_1", GLU_VERSION_1_1 , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GLU_VERSION_1_2", GLU_VERSION_1_2 , CONST_CS | CONST_PERSISTENT);
@@ -1264,11 +1253,28 @@ int glu_init(int module_number)
 	return SUCCESS;
 }
 
-int glu_request_shutdown()
+int glu_request_init(int module_number)
+{
+    	TSRMLS_FETCH();
+
+	tess_callbacks = (HashTable*)emalloc(sizeof(HashTable));
+	zend_hash_init(tess_callbacks, 0, NULL, ZVAL_PTR_DTOR, 0);
+	tess_stack = (HashTable*)emalloc(sizeof(HashTable));
+	zend_hash_init(tess_stack, 0, NULL, NULL, 0);
+
+	le_quad = zend_register_list_destructors_ex(gluquadric_destructor, NULL, le_quad_name, module_number);
+	le_nurb = zend_register_list_destructors_ex(glunurbs_destructor, NULL, le_nurb_name, module_number);
+	le_tess = zend_register_list_destructors_ex(glutesselator_destructor, NULL, le_tess_name, module_number);
+        
+    	return SUCCESS;
+}
+    int glu_request_shutdown()
 {
 	zend_hash_destroy(tess_callbacks);
 	efree(tess_callbacks);
+        tess_callbacks = NULL;
 	zend_hash_destroy(tess_stack);
 	efree(tess_stack);
+        tess_stack = NULL;
 	return SUCCESS;
 }
