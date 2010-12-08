@@ -28,7 +28,7 @@ function display() {
     glFlush();
 
     // OpenGL がレンダリングした画像pixel を吸い出す
-    // red, green blue の順で並ぶ > GL_RGB
+    // red green blue alpha の順で並ぶ > GL_RGBA
 
     $pixels = array(); // 空配列を渡す
     glReadPixels(0, 0, $width, $height, GL_RGBA, GL_UNSIGNED_BYTE, $pixels);
@@ -41,7 +41,7 @@ function display() {
     	for ($x = 0; $x < $width ; $x++) {
             $rgb = $pixels[$i];
              if ($rgb < 0) {
-                $rgb += 4294967296; // signed => unsigned long
+                $rgb += 4294967296; // integer => float
             }
             $blue  = $rgb % 0x100 ; $rgb /= 0x100;
 	    $green = $rgb % 0x100 ; $rgb /= 0x100;
