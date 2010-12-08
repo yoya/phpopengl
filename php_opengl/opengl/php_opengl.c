@@ -78,6 +78,16 @@ ZEND_BEGIN_ARG_INFO_EX(force_ref_fourth_arg, 1, 0, 4)
     ZEND_ARG_INFO(1, arg4)
 ZEND_END_ARG_INFO()
 
+ZEND_BEGIN_ARG_INFO_EX(force_ref_seventh_arg, 1, 0, 7)
+    ZEND_ARG_INFO(0, arg1)
+    ZEND_ARG_INFO(0, arg2)
+    ZEND_ARG_INFO(0, arg3)
+    ZEND_ARG_INFO(0, arg4)
+    ZEND_ARG_INFO(0, arg5)
+    ZEND_ARG_INFO(0, arg6)
+    ZEND_ARG_INFO(1, arg7)
+ZEND_END_ARG_INFO()
+
 ZEND_BEGIN_ARG_INFO_EX(force_ref_ninth_arg, 1, 0, 9)
     ZEND_ARG_INFO(0, arg1)
     ZEND_ARG_INFO(0, arg2)
@@ -102,6 +112,8 @@ static unsigned char force_ref_third_arg[] =
 static unsigned char force_ref_fourth_arg[] =
 {4, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_FORCE};
 
+static unsigned char force_ref_seventh_arg[] =
+{7, BYREF_NONE,  BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_FORCE};
 static unsigned char force_ref_ninth_arg[] =
 {9, BYREF_NONE,  BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_NONE, BYREF_FORCE};
 #endif
@@ -346,7 +358,7 @@ function_entry opengl_functions[] = {
 	PHP_FE(glrasterpos4s,NULL)
 	PHP_FE(glrasterpos4sv,NULL)
 	PHP_FE(glreadbuffer,NULL)
-	PHP_FE(glreadpixels,NULL)
+	PHP_FE(glreadpixels,force_ref_seventh_arg)
 	PHP_FE(glreadpixels_yoya,NULL)
 	PHP_FE(glrectd,NULL)
 	PHP_FE(glrectdv,NULL)
@@ -3654,6 +3666,7 @@ PHP_FUNCTION(glreadpixels)
 {
 	zval *x, *y, *width, *height, *format, *type, *pixels;
 	GLvoid *v_pixels;
+	int v_pixels_len;
 	SEVEN_PARAM(x, y, width, height, format, type, pixels);
 	convert_to_long(x);
 	convert_to_long(y);
@@ -3662,8 +3675,10 @@ PHP_FUNCTION(glreadpixels)
 	convert_to_long(format);
 	convert_to_long(type);
 	convert_to_array(pixels);
-	v_pixels = php_array_to_long_array(pixels);
+	v_pixels_len = (int)Z_LVAL_P(width) * Z_LVAL_P(height)* sizeof(long);
+	v_pixels = emalloc(v_pixels_len);
 	glReadPixels((int)Z_LVAL_P(x),(int)Z_LVAL_P(y),(int)Z_LVAL_P(width),(int)Z_LVAL_P(height),(int)Z_LVAL_P(format),(int)Z_LVAL_P(type),v_pixels);
+	long_array_to_php_array(v_pixels, v_pixels_len, pixels);
 }
 // }}}
 
