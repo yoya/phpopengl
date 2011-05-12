@@ -3679,6 +3679,7 @@ PHP_FUNCTION(glreadpixels)
 	v_pixels = emalloc(v_pixels_len);
 	glReadPixels((int)Z_LVAL_P(x),(int)Z_LVAL_P(y),(int)Z_LVAL_P(width),(int)Z_LVAL_P(height),(int)Z_LVAL_P(format),(int)Z_LVAL_P(type),v_pixels);
 	long_array_to_php_array(v_pixels, v_pixels_len, pixels);
+        efree(v_pixels);
 }
 // }}}
 
@@ -5875,6 +5876,7 @@ PHP_MINIT_FUNCTION(opengl)
 #endif
 	REGISTER_LONG_CONSTANT("GL_LOGIC_OP", GL_LOGIC_OP , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GL_TEXTURE_COMPONENTS", GL_TEXTURE_COMPONENTS , CONST_CS | CONST_PERSISTENT);
+        REGISTER_LONG_CONSTANT("GL_POINT_SPRITE", GL_POINT_SPRITE , CONST_CS | CONST_PERSISTENT);
 
 	glu_init(module_number);
 
