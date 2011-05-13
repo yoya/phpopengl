@@ -131,12 +131,13 @@ require_once 'trackball.php';
 
 function display()
 {
+    global $lightpos;
     /* モデルビュー変換行列の初期化 */
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
 
     /* 光源の位置を設定 */
-    glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+    glLightfv(GL_LIGHT0, GL_POSITION, $lightpos);
 
     /* 視点の移動（物体の方を奥に移動）*/
     glTranslated(0.0, 0.0, -3.0);

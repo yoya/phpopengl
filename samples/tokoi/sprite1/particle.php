@@ -32,11 +32,11 @@ class particle {
     }
     function update() {
         $this->p[0] += $this->v[0];
-        $this->v[1] += $this->g;
+        $this->v[1] += self::$g;
         $this->p[1] += $this->v[1];
-        if ($this->p[1] < $this->h) {
-            $this->p[1] = $this->h;
-            $this->v[1] = - $this->a * $this->v[1];
+        if ($this->p[1] < self::$h) {
+	    $this->p[1] = self::$h;
+            $this->v[1] = - self::$a * $this->v[1];
         }
         $this->p[2] += $this->v[2];
     }

@@ -128,10 +128,10 @@ class trackball {
                 $dq = array( cos($ar), $dy * $as, $dx * $as, 0.0 );
 
                 /* クォータニオンを掛けて回転を合成 */
-                self::qmul($tq, $dq, $cq);
+                self::qmul($tq, $dq, self::$cq);
 
                 /* クォータニオンから回転の変換行列を求める */
-                self::qrot(self::$rt, $tq);
+                self::qrot(self::$rt, self::$tq);
             }
         }
     }
