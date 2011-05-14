@@ -1,6 +1,6 @@
 <?php
 
-// glReadPixels の使い方
+// glReadPixels のサンプル。
 
 require_once('HSVtoRGB.php');
 
@@ -40,72 +40,29 @@ function display() {
     for ($y = $height ; $y >= 0; $y--) {
     	for ($x = 0; $x < $width ; $x++) {
             $rgb = $pixels[$i];
-             if ($rgb < 0) {
+            if ($rgb < 0) {
                 $rgb += 4294967296; // integer => float
             }
             $blue  = $rgb % 0x100 ; $rgb /= 0x100;
-	    $green = $rgb % 0x100 ; $rgb /= 0x100;
+            $green = $rgb % 0x100 ; $rgb /= 0x100;
             $red   = $rgb % 0x100 ; $rgb /= 0x100;
-	    $color = imagecolorallocate($im, $red, $green, $blue);
-	    imagesetpixel($im, $x, $y, $color); // pixel を埋めていく
-	    $i ++;
-   	}
+            $color = imagecolorallocate($im, $red, $green, $blue);
+            imagesetpixel($im, $x, $y, $color); // pixel を埋めていく
+            $i ++;
+        }
     }
     imagepng($im, "output.png"); // PNG ファイルとして保存!!!
-}
-
-function keyboard($key, $x, $y) {
-    if ($key == chr(0x1b)) { // Esc key
-        exit(0);
-    }
-}
-
-function special($key, $x, $y) {
-    $delta_x = 0.03;
-    $delta_y = 0.03;
-    switch ($key) {
-    case  GLUT_KEY_LEFT:
-        glTranslatef(-$delta_x, 0, 0.0);
-        break;
-    case  GLUT_KEY_RIGHT:
-        glTranslatef($delta_x, 0, 0.0);
-        break;
-    case  GLUT_KEY_UP:
-        glTranslatef(0, $delta_y, 0.0);
-        break;
-    case  GLUT_KEY_DOWN:
-        glTranslatef(0, -$delta_y, 0.0);
-        break;
-    case  GLUT_KEY_HOME:
-        glRotatef(10, 0, 1, 0);
-        break;
-    case  GLUT_KEY_END:
-        glRotatef(-10, 0, 1, 0);
-        break;
-    }
-    glutPostRedisplay();
-}
-
-function mouse($button, $state, $x, $y) {
-    if ($state != 0) {
-        return ;
-    }
-    echo "mouse: $button $state: ($x, $y)\n";
-    glutPostRedisplay();
 }
 
 function init() {
     global $argv;
     global $width, $height;
     glutInit($argv);
-    
-//    glutInitWindowSize(400, 400);
     glutInitWindowSize($width, $height);
-
-//    glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
         
     glutCreateWindow("Color Button");
+
     glClearColor(0.0, 0.0, 0.0, 0.0);
     
     $lit_amb = array(1.0, 1.0, 1.0, 0.0); /* 環境光の強さ */
@@ -122,20 +79,13 @@ function init() {
     glEnable(GL_LIGHT0);
     glEnable(GL_LIGHTING);
 
-    glDisable(GL_DEPTH_TEST) ;
+    glDisable(GL_DEPTH_TEST);
 
     glBlendFunc(GL_ONE, GL_ONE);
 }
 
-$button_list = array(
-    array('c' => '#'), array('c' => '0'), array('c' => '*'),
-);
-
-for ($i = 1 ; $i <= 9 ; $i++) {
-    $button_list[] = array('c' => (string)$i);
-}
-
-foreach ($button_list as $idx => &$button) {
+$button_list = array();
+for ($idx = 0; $idx < 12 ; $idx++) {
     $button['x'] = -0.25 + 0.22 * ($idx % 3);
     $button['y'] = -0.35 + 0.22 * floor(($idx / 3));
     $hsv = array((360 / 12) * $idx, 160, 255);
@@ -143,15 +93,11 @@ foreach ($button_list as $idx => &$button) {
     $button['red']   = $rgb[0] / 256;
     $button['green'] = $rgb[1] / 256;
     $button['blue']  = $rgb[2] / 256;
+    $button_list[] = $button;
 }
 
 init();
 
-glutDisplayFunc('display');
-// display(); exit(0);
+display();
 
-glutKeyboardFunc('keyboard');
-glutSpecialFunc('special');
-glutMouseFunc('mouse');
-
-glutMainLoop();
+exit(0);
