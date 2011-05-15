@@ -33,51 +33,51 @@ $texture = "ball.raw";       /* テクスチャファイル名 */
  */
 function init()
 {
-   /* テクスチャ画像の読み込み */
-   global $texture;
-   $imagedata = file_get_contents($texture);
-   if ($imagedata === false) {
-       echo  "$texture が開けません".PHP_EOL;
-   }
-   $image = str_split($imagedata);
-
-   /* テクスチャ画像はバイト単位に詰め込まれている */
-   glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
-
-  /* テクスチャを拡大・縮小する方法の指定 */
+    /* テクスチャ画像の読み込み */
+    global $texture;
+    $imagedata = file_get_contents($texture);
+    if ($imagedata === false) {
+        echo  "$texture が開けません".PHP_EOL;
+    }
+    $image = str_split($imagedata);
+    
+    /* テクスチャ画像はバイト単位に詰め込まれている */
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
+    
+    /* テクスチャを拡大・縮小する方法の指定 */
 //   glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
-      glTexParameteri(GL_TEXTURE_2D, 0, GL_TRUE);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-   
-   /* テクスチャの繰り返し方法の指定 */
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
-   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
-
-   /* テクスチャ環境 */
-   glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
-   glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
-
-   /* テクスチャの割り当て */
-   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXWIDTH, TEXHEIGHT, 0,
-                GL_RGBA, GL_UNSIGNED_BYTE, $image);
-
-   /* アルファテストの判別関数 */
-   glAlphaFunc(GL_GREATER, 0.5);
-   
-   /* 距離に対する点の大きさの制御 */
-//glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, $distance);
-
-/* 初期設定 */
-glClearColor(0.3, 0.3, 1.0, 0.0);
-glEnable(GL_DEPTH_TEST);
-glDisable(GL_CULL_FACE);
-
-/* 陰影付けを無効にする */
-glDisable(GL_LIGHTING);
-
-/* 地面の高さ */
-particle::height(HEIGHT);
+    glTexParameteri(GL_TEXTURE_2D, 0, GL_TRUE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    
+    /* テクスチャの繰り返し方法の指定 */
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP);
+    
+    /* テクスチャ環境 */
+    glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_REPLACE);
+    glTexEnvi(GL_POINT_SPRITE, GL_COORD_REPLACE, GL_TRUE);
+    
+    /* テクスチャの割り当て */
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, TEXWIDTH, TEXHEIGHT, 0,
+                 GL_RGBA, GL_UNSIGNED_BYTE, $image);
+    
+    /* アルファテストの判別関数 */
+    glAlphaFunc(GL_GREATER, 0.5);
+    
+    /* 距離に対する点の大きさの制御 */
+    //glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, $distance);
+    
+    /* 初期設定 */
+    glClearColor(0.3, 0.3, 1.0, 0.0);
+    glEnable(GL_DEPTH_TEST);
+    glDisable(GL_CULL_FACE);
+    
+    /* 陰影付けを無効にする */
+    glDisable(GL_LIGHTING);
+    
+    /* 地面の高さ */
+    particle::height(HEIGHT);
 }
 
 
@@ -188,21 +188,21 @@ function idle()
 function mouse($button, $state, $x, $y)
 {
     switch ($button) {
-    case GLUT_LEFT_BUTTON:
+      case GLUT_LEFT_BUTTON:
         switch ($state) {
-        case GLUT_DOWN:
+          case GLUT_DOWN:
             /* トラックボール開始 */
             trackball::Start($x, $y);
             break;
-        case GLUT_UP:
+          case GLUT_UP:
             /* トラックボール停止 */
             trackball::Stop($x, $y);
             break;
-        default:
+          default:
             break;
         }
         break;
-    default:
+      default:
         break;
     }
 }
@@ -216,20 +216,20 @@ function motion($x, $y)
 function keyboard($key, $x, $y)
 {
     switch ($key) {
-    case 'q':
-    case 'Q':
-    case '\033':
+      case 'q':
+      case 'Q':
+      case '\033':
         /* ESC か q か Q をタイプしたら終了 */
         exit(0);
-    default:
+      default:
         break;
     }
 }
 
 
-  /*
-   ** メインプログラム
-   */
+/*
+ ** メインプログラム
+ */
 
 glutInit($argv);
 glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
