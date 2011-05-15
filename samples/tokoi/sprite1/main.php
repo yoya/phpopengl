@@ -35,16 +35,18 @@ function init()
 {
    /* テクスチャ画像の読み込み */
    global $texture;
-   $image = file_get_contents($texture);
-   if ($image === false) {
+   $imagedata = file_get_contents($texture);
+   if ($imagedata === false) {
        echo  "$texture が開けません".PHP_EOL;
    }
+   $image = str_split($imagedata);
 
    /* テクスチャ画像はバイト単位に詰め込まれている */
    glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
 
   /* テクスチャを拡大・縮小する方法の指定 */
-   glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+//   glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+      glTexParameteri(GL_TEXTURE_2D, 0, GL_TRUE);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
    
@@ -229,7 +231,7 @@ function keyboard($key, $x, $y)
    ** メインプログラム
    */
 
-glutInit($argc);
+glutInit($argv);
 glutInitDisplayMode(GLUT_RGBA | GLUT_DEPTH | GLUT_DOUBLE);
 glutCreateWindow($argv[0]);
 glutDisplayFunc('display');
