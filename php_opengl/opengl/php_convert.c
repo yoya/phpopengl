@@ -134,6 +134,7 @@ void *php_array_to_c_array(zval *param,int type,int size,int *array_size)
 				((long*)params)[i] = Z_LVAL_P(*cur);
 				break;
 			case TO_C_UCHAR:
+                        case TO_C_UBYTE: // yoya
 				convert_to_long(*cur);
 				((unsigned char*)params)[i] = (unsigned char)Z_LVAL_P(*cur);
 				break;
