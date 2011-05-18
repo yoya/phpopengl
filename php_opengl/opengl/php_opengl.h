@@ -243,6 +243,7 @@ PHP_FUNCTION(glpixeltransferf);
 PHP_FUNCTION(glpixeltransferi);
 PHP_FUNCTION(glpixelzoom);
 PHP_FUNCTION(glpointsize);
+PHP_FUNCTION(glPointParameterfv);
 PHP_FUNCTION(glpolygonmode);
 PHP_FUNCTION(glpolygonoffset);
 PHP_FUNCTION(glpolygonstipple);
