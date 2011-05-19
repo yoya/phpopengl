@@ -1360,9 +1360,11 @@ PHP_FUNCTION(glutcopycolormap)
 PHP_FUNCTION(glutget)
 {
 	zval *state;
+	int ret;
 	ONE_PARAM(state);
 	convert_to_long(state);
-	glutGet(Z_LVAL_P(state));
+	ret = glutGet(Z_LVAL_P(state));
+	RETURN_LONG(ret);
 }
 // }}}
 
