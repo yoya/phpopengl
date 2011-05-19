@@ -1,5 +1,9 @@
 <?php
 
+/*
+ *  http://marina.sys.wakayama-u.ac.jp/~tokoi/?date=20060227
+ */
+
 require_once 'particle.php';
 
 /*
@@ -35,6 +39,7 @@ function init()
 {
     /* テクスチャ画像の読み込み */
     global $texture;
+    global $distance;
     $imagedata = file_get_contents($texture);
     if ($imagedata === false) {
         echo  "$texture が開けません".PHP_EOL;
@@ -45,7 +50,7 @@ function init()
     glPixelStorei(GL_UNPACK_ALIGNMENT, 4);
     
     /* テクスチャを拡大・縮小する方法の指定 */
-//   glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+//    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
     glTexParameteri(GL_TEXTURE_2D, 0, GL_TRUE);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
@@ -66,7 +71,7 @@ function init()
     glAlphaFunc(GL_GREATER, 0.5);
     
     /* 距離に対する点の大きさの制御 */
-    //glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, $distance);
+//    glPointParameterfv(GL_POINT_DISTANCE_ATTENUATION, $distance);
     
     /* 初期設定 */
     glClearColor(0.3, 0.3, 1.0, 0.0);
