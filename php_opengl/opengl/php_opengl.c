@@ -1594,7 +1594,7 @@ PHP_FUNCTION(glevalcoord1dv)
 	convert_to_array(u);
 	v_u = php_array_to_double_array(u);
 	glEvalCoord1dv(v_u);
-	efre(v_u);
+	efree(v_u);
 }
 // }}}
 
@@ -3317,7 +3317,7 @@ PHP_FUNCTION(glPointParameterfv)
 	convert_to_long(pname);
 	convert_to_array(params);
 	v_params = php_array_to_float_array(params);
-	glPointParameterfv((int)Z_LVAL_P(pname), v_params);
+	glPointParameterfv((GLenum)Z_LVAL_P(pname), v_params);
 	efree(v_params);
 }
 // }}}
