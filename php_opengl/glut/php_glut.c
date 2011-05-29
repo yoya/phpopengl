@@ -131,6 +131,7 @@ function_entry glut_functions[] = {
 	PHP_FE(glutwireicosahedron,NULL)
 	PHP_FE(glutsolidteapot,NULL)
 	PHP_FE(glutwireteapot,NULL)
+	PHP_FE(glutIgnoreKeyRepeat,NULL)
 
 	{NULL, NULL, NULL}
 };
@@ -1715,6 +1716,16 @@ PHP_FUNCTION(glutwireteapot)
 	ONE_PARAM(size);
 	convert_to_double(size);
 	glutWireTeapot(Z_DVAL_P(size));
+}
+// }}}
+
+// {{{ void glutIgnoreKeyRepeat(long ignore)
+PHP_FUNCTION(glutIgnoreKeyRepeat)
+{
+	zval *ignore;
+	ONE_PARAM(ignore);
+	convert_to_long(ignore);
+	glutIgnoreKeyRepeat(Z_LVAL_P(ignore));
 }
 // }}}
 
