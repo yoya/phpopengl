@@ -931,7 +931,7 @@ PHP_FUNCTION(glutKeyboardUpFunc)
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutKeyboardUpFunc);
 	HASH_CALLBACK(callback, 1, GLUT_KEYBOARDUP_CALLBACK);
-	glutKeyboardFunc(glutKeyboardUpFunc_callback);
+	glutKeyboardUpFunc(glutKeyboardUpFunc_callback);
 	RETURN_TRUE;
 }
 // }}}
@@ -1102,7 +1102,7 @@ PHP_FUNCTION(glutSpecialUpFunc)
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutSpecialUpFunc);
 	HASH_CALLBACK(callback, 1, GLUT_SPECIALUP_CALLBACK);
-	glutSpecialFunc(glutSpecialUpFunc_callback);
+	glutSpecialUpFunc(glutSpecialUpFunc_callback);
 	RETURN_TRUE;
 }
 // }}}
