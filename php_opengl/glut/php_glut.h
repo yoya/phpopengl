@@ -87,12 +87,15 @@ PHP_FUNCTION(glutremovemenuitem);
 PHP_FUNCTION(glutoverlaydisplayfunc);
 PHP_FUNCTION(glutreshapefunc);
 PHP_FUNCTION(glutkeyboardfunc);
+PHP_FUNCTION(glutKeyboardUpFunc); // yoya
+PHP_FUNCTION(glutkeyboardfunc);
 PHP_FUNCTION(glutmousefunc);
 PHP_FUNCTION(glutmotionfunc);
 PHP_FUNCTION(glutpassivemotionfunc);
 PHP_FUNCTION(glutvisibilityfunc);
 PHP_FUNCTION(glutentryfunc);
 PHP_FUNCTION(glutspecialfunc);
+PHP_FUNCTION(glutSpecialUpFunc); // yoya
 PHP_FUNCTION(glutspaceballmotionfunc);
 PHP_FUNCTION(glutspaceballrotatefunc);
 PHP_FUNCTION(glutspaceballbuttonfunc);
@@ -141,11 +144,13 @@ void glutdisplayfunction_callback();
 void glutoverlaydisplayfunc_callback();
 void glutreshapefunc_callback(int width,int height);
 void glutkeyboardfunc_callback(unsigned char key,int x,int y);
+void glutKeyboardUpFunc_callback(unsigned char key,int x,int y);
 void glutmotionfunc_callback(int x,int y);
 void glutpassivemotionfunc_callback(int x,int y);
 void glutvisibilityfunc_callback(int state);
 void glutentryfunc_callback(int state);
 void glutspecialfunc_callback(int key,int x,int y);
+void glutSpecialUpFunc_callback(int key,int x,int y);
 void glutspaceballmotionfunc_callback(int x,int y,int z);
 void glutspaceballrotatefunc_callback(int x,int y,int z);
 void glutspaceballbuttonfunc_callback(int button,int state);
@@ -180,6 +185,8 @@ void gluttimerfunc_callback(int value);
 #define GLUT_IDLE_CALLBACK 19
 #define GLUT_TIMER_CALLBACK 20
 #define GLUT_RESHAPE_CALLBACK 21
+#define GLUT_KEYBOARDUP_CALLBACK 22 // yoya
+#define GLUT_SPECIALUP_CALLBACK 23  // yoya
 
 #define IS_NULL_CALLBACK(callback,glutfunc) \
 		if (Z_TYPE_P(callback) == IS_NULL || ( Z_TYPE_P(callback) == IS_STRING && Z_STRLEN_P(callback) == 0) || ( Z_TYPE_P(callback) == IS_ARRAY && zend_hash_num_elements(Z_ARRVAL_P(callback)) == 0)) { \

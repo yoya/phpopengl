@@ -85,12 +85,14 @@ function_entry glut_functions[] = {
 	PHP_FE(glutoverlaydisplayfunc,NULL)
 	PHP_FE(glutreshapefunc,NULL)
 	PHP_FE(glutkeyboardfunc,NULL)
+	PHP_FE(glutKeyboardUpFunc,NULL) // yoya
 	PHP_FE(glutmousefunc,NULL)
 	PHP_FE(glutmotionfunc,NULL)
 	PHP_FE(glutpassivemotionfunc,NULL)
 	PHP_FE(glutvisibilityfunc,NULL)
 	PHP_FE(glutentryfunc,NULL)
 	PHP_FE(glutspecialfunc,NULL)
+	PHP_FE(glutSpecialUpFunc,NULL) // yoya
 	PHP_FE(glutspaceballmotionfunc,NULL)
 	PHP_FE(glutspaceballrotatefunc,NULL)
 	PHP_FE(glutspaceballbuttonfunc,NULL)
@@ -892,6 +894,21 @@ void glutkeyboardfunc_callback(unsigned char key,int x,int y)
 	call_user_callback(call_backs,GLUT_KEYBOARD_CALLBACK,3,params);
 }
 
+void glutKeyboardUpFunc_callback(unsigned char key,int x,int y)
+{
+	zval *params[3];
+	char *str;
+	params[0] = (zval *)emalloc(sizeof(zval));
+	params[1] = (zval *)emalloc(sizeof(zval));
+	params[2] = (zval *)emalloc(sizeof(zval));
+	str = (char *)emalloc(2);
+	sprintf(str,"%c",key);
+	ZVAL_STRING(params[0],str,1);
+	ZVAL_LONG(params[1],x);
+	ZVAL_LONG(params[2],y);
+	call_user_callback(call_backs,GLUT_KEYBOARDUP_CALLBACK,3,params);
+}
+
 // {{{ bool glutkeyboardfunc(mixed callback)
 PHP_FUNCTION(glutkeyboardfunc)
 {
@@ -901,6 +918,19 @@ PHP_FUNCTION(glutkeyboardfunc)
 	IS_NULL_CALLBACK(callback, glutKeyboardFunc);
 	HASH_CALLBACK(callback, 1, GLUT_KEYBOARD_CALLBACK);
 	glutKeyboardFunc(glutkeyboardfunc_callback);
+	RETURN_TRUE;
+}
+// }}}
+
+// {{{ bool glutKeyboardUpFunc(mixed callback)
+PHP_FUNCTION(glutKeyboardUpFunc)
+{
+	zval *callback;
+	char *callback_name = NULL;
+	ONE_PARAM(callback);
+	IS_NULL_CALLBACK(callback, glutKeyboardUpFunc);
+	HASH_CALLBACK(callback, 1, GLUT_KEYBOARDUP_CALLBACK);
+	glutKeyboardFunc(glutKeyboardUpFunc_callback);
 	RETURN_TRUE;
 }
 // }}}
@@ -1038,6 +1068,18 @@ void glutspecialfunc_callback(int key,int x,int y)
 	call_user_callback(call_backs,GLUT_SPECIAL_CALLBACK,3,params);
 }
 
+void glutSpecialUpFunc_callback(int key,int x,int y)
+{
+	zval *params[3];
+	params[0] = (zval *)emalloc(sizeof(zval));
+	params[1] = (zval *)emalloc(sizeof(zval));
+	params[2] = (zval *)emalloc(sizeof(zval));
+	ZVAL_LONG(params[0],key);
+	ZVAL_LONG(params[1],x);
+	ZVAL_LONG(params[2],y);
+	call_user_callback(call_backs,GLUT_SPECIALUP_CALLBACK,3,params);
+}
+
 // {{{ bool glutspecialfunc(mixed callback)
 PHP_FUNCTION(glutspecialfunc)
 {
@@ -1051,6 +1093,18 @@ PHP_FUNCTION(glutspecialfunc)
 }
 // }}}
 
+// {{{ bool glutSpecialUpFunc(mixed callback)
+PHP_FUNCTION(glutSpecialUpFunc)
+{
+	zval *callback;
+	char *callback_name = NULL;
+	ONE_PARAM(callback);
+	IS_NULL_CALLBACK(callback, glutSpecialUpFunc);
+	HASH_CALLBACK(callback, 1, GLUT_SPECIALUP_CALLBACK);
+	glutSpecialFunc(glutSpecialUpFunc_callback);
+	RETURN_TRUE;
+}
+// }}}
 
 void glutspaceballmotionfunc_callback(int x,int y,int z)
 {
