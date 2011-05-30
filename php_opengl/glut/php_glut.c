@@ -101,6 +101,7 @@ function_entry glut_functions[] = {
 	PHP_FE(gluttabletmotionfunc,NULL)
 	PHP_FE(gluttabletbuttonfunc,NULL)
 	PHP_FE(glutidlefunc,NULL)
+	PHP_FE(gluttimerfunc,NULL) // yoya
 	PHP_FE(glutsetcolor,NULL)
 	PHP_FE(glutgetcolor,NULL)
 	PHP_FE(glutcopycolormap,NULL)
@@ -1364,7 +1365,7 @@ PHP_FUNCTION(gluttimerfunc)
 {
 	zval *callback,*seconds,*value;
 	THREE_PARAM(seconds,callback,value);
-	HASH_CALLBACK(callback, 2, GLUT_VISIBILITY_CALLBACK);
+	HASH_CALLBACK(callback, 2, GLUT_TIMER_CALLBACK);
 	convert_to_long(seconds);
 	convert_to_long(value);
 	glutTimerFunc(Z_LVAL_P(seconds),gluttimerfunc_callback,Z_LVAL_P(value));
