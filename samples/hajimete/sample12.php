@@ -1,10 +1,10 @@
-#include <gl/glut.h>
+<?php
 
 //ŽOŠpŒ`‚Ì•`‰æ
 function drawTriangle()
 {
 	glBegin(GL_TRIANGLES);
-	glVertex3f(0.0, 0.5f, 0.0);
+	glVertex3f(0.0, 0.5, 0.0);
 	glVertex3f(-0.5, -0.5, 0.0);
 	glVertex3f(0.5, -0.5, 0.0);
 	glEnd();
