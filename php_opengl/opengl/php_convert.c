@@ -80,8 +80,12 @@ void c_array_to_php_array(void *c_array,int num,zval *php_array,int type)
 		case C_BOOLEAN_TO_PHP_BOOLEAN:
 			ZVAL_BOOL(val,(unsigned char)((unsigned char*)c_array)[i]);
 			break;
+                        
 		case C_CHAR_TO_PHP_LONG:
 			ZVAL_LONG(val,(char)((char*)c_array)[i]);
+			break;
+                case C_UCHAR_TO_PHP_LONG:
+			ZVAL_LONG(val,(unsigned char)((unsigned char*)c_array)[i]);
 			break;
 		case C_USHORT_TO_PHP_LONG:
 			ZVAL_LONG(val,(unsigned short)((unsigned short*)c_array)[i]);

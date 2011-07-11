@@ -34,6 +34,7 @@
 #define C_CHAR_TO_PHP_LONG 6
 #define C_UINT_TO_PHP_LONG 7
 #define C_USHORT_TO_PHP_LONG 8
+#define C_UCHAR_TO_PHP_LONG 9
 
 #define TO_C_LONG 1
 #define TO_C_DOUBLE 2
@@ -59,6 +60,7 @@ void c_array_to_php_array(void *c_array,int num,zval *php_array,int type);
 #define double_array_to_php_array(a,i,z) c_array_to_php_array(a,i,z,C_DOUBLE_TO_PHP_DOUBLE)
 #define ushort_array_to_php_array(a,i,z) c_array_to_php_array(a,i,z,C_USHORT_TO_PHP_LONG)
 #define char_array_to_php_array(a,i,z) c_array_to_php_array(a,i,z,C_CHAR_TO_PHP_LONG)
+#define uchar_array_to_php_array(a,i,z) c_array_to_php_array(a,i,z,C_UCHAR_TO_PHP_LONG)
 
 void *php_array_to_c_array(zval *param,int type,int size,int *array_size);
 #define php_array_to_string_array(z) (char **)php_array_to_c_array(z,TO_C_STRING,sizeof(char *),NULL)
