@@ -321,7 +321,9 @@ function_entry opengl_functions[] = {
 	PHP_FE(glpixeltransferi,NULL)
 	PHP_FE(glpixelzoom,NULL)
 	PHP_FE(glpointsize,NULL)
-	PHP_FE(glPointParameterfv,NULL) // yoya
+#ifdef  GL_VERSION_1_4
+	PHP_FE(glPointParameterfv,NULL) // OpenGL 1.4
+#endif // GL_VERSION_1_4
 	PHP_FE(glpolygonmode,NULL)
 	PHP_FE(glpolygonoffset,NULL)
 	PHP_FE(glpolygonstipple,NULL)
@@ -3309,6 +3311,7 @@ PHP_FUNCTION(glpointsize)
 // }}}
 
 // {{{ void glPointParameterfv(long pname, double *params) by yoya
+#ifdef  GL_VERSION_1_4
 PHP_FUNCTION(glPointParameterfv)
 {
 	zval *pname, *params;
@@ -3320,6 +3323,7 @@ PHP_FUNCTION(glPointParameterfv)
 	glPointParameterfv((GLenum)Z_LVAL_P(pname), v_params);
 	efree(v_params);
 }
+#endif // GL_VERSION_1_4
 // }}}
 
 // {{{ void glpolygonmode(long face, long mode)
@@ -3794,27 +3798,8 @@ PHP_FUNCTION(glreadpixels)
         v_pixels_len = (int)Z_LVAL_P(width) * Z_LVAL_P(height)* n_per_pixel;
 	v_pixels = emalloc(v_pixels_len);
 	glReadPixels((int)Z_LVAL_P(x),(int)Z_LVAL_P(y),(int)Z_LVAL_P(width),(int)Z_LVAL_P(height),(int)Z_LVAL_P(format),(int)Z_LVAL_P(type),v_pixels);
-        for (i = 0, j=0 ; j < v_pixels_len ; i++, j += n_per_pixel) {
-            zval *p;
-            ALLOC_INIT_ZVAL(p);
-            array_init(p);
-            switch(Z_LVAL_P(format)) {
-            case GL_RGBA:
-                add_assoc_long(p, "red",   v_pixels[j]);
-                add_assoc_long(p, "green", v_pixels[j+1]);
-                add_assoc_long(p, "blue",  v_pixels[j+2]);
-                add_assoc_long(p, "alpha", v_pixels[j+3]);
-                break;
-            case GL_RGB:
-                add_assoc_long(p, "red",   v_pixels[j]);
-                add_assoc_long(p, "green", v_pixels[j+1]);
-                add_assoc_long(p, "blue",  v_pixels[j+2]);
-                break;
-            }
-            add_index_zval(pixels, i, p);
-        }
+        uchar_array_to_php_array(v_pixels, v_pixels_len, pixels);
         efree(v_pixels);
-        RETURN_TRUE;
 }
 // }}}
 
