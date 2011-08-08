@@ -27,6 +27,7 @@
 /* $Id: php_glu.c,v 1.14 2001/10/12 12:56:18 drbrain Exp $ */
 
 #ifdef PHP_WIN32
+#include <WinSock2.h>
 #include <windows.h>
 #endif
 #include <GL/gl.h>
@@ -1084,7 +1085,7 @@ void glutesselator_destructor(zend_rsrc_list_entry *tesselator TSRMLS_DC)
 	gluDeleteTess(tesselator->ptr);
 }
 
-int glu_init(int module_number)
+int glu_init(int module_number TSRMLS_DC)
 {
 	// GLU_1_2
 	REGISTER_LONG_CONSTANT("GLU_VERSION_1_1", GLU_VERSION_1_1 , CONST_CS | CONST_PERSISTENT);

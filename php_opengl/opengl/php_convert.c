@@ -27,6 +27,7 @@
 /* $Id: php_convert.c,v 1.4 2001/09/02 16:25:52 drbrain Exp $ */
 
 #ifdef PHP_WIN32
+#include <WinSock2.h>
 #include <windows.h>
 #endif
 #include <GL/gl.h>
