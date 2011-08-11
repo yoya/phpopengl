@@ -1,11 +1,13 @@
 // $Id:$
 // vim:ft=javascript
 
-ARG_ENABLE("opengl", "OpenGL support", "yes");
+ARG_ENABLE("opengl", "OpenGL support", "yes,shared");
 
 if (PHP_OPENGL == "yes") {
-	CHECK_LIB("OpenGL32.Lib;GlU32.Lib", "gd", PHP_OPENGL) &&
+	CHECK_LIB("OpenGL32.Lib", "opengl", PHP_OPENGL);
+	CHECK_LIB("GlU32.Lib", "glu", PHP_OPENGL);
 	EXTENSION("opengl", "php_convert.c php_glu.c php_opengl.c", true /* enable shared */);
 	AC_DEFINE("HAVE_PHP_OPENGL", 1, "OpenGL support");
 	PHP_INSTALL_HEADERS("ext/opengl/", "php_convert.h  php_glu.h  php_opengl.h");
+	ADD_DEF_FILE("ext\\opengl\\glu32.def");
 }
