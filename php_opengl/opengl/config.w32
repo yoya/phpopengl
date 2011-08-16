@@ -4,10 +4,12 @@
 ARG_ENABLE("opengl", "OpenGL support", "yes,shared");
 
 if (PHP_OPENGL == "yes") {
-	CHECK_LIB("OpenGL32.Lib", "opengl", PHP_OPENGL);
-	CHECK_LIB("GlU32.Lib", "glu", PHP_OPENGL);
-	EXTENSION("opengl", "php_convert.c php_glu.c php_opengl.c", true /* enable shared */);
+	CHECK_LIB("opengl32.lib", "opengl", PHP_OPENGL);
+	CHECK_LIB("glu32.lib"   , "opengl", PHP_OPENGL);
+	EXTENSION("opengl", "php_convert.c php_glu.c php_opengl.c", null, "-Iext/opengl/libopengl", "php_opengl.dll");
 	AC_DEFINE("HAVE_PHP_OPENGL", 1, "OpenGL support");
+	ADD_FLAG("CFLAGS_OPENGL", " \
+/D MSWIN32 \
+		");
 	PHP_INSTALL_HEADERS("ext/opengl/", "php_convert.h  php_glu.h  php_opengl.h");
-	ADD_DEF_FILE("ext\\opengl\\glu32.def");
 }
