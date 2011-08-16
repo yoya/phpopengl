@@ -30,6 +30,7 @@
 #include "config.h"
 #endif
 
+#include <stdlib.h> // exit
 #include <GL/glut.h>
 
 #include "php.h"
