@@ -1,0 +1,14 @@
+// $Id:$
+// vim:ft=javascript
+
+ARG_ENABLE("glut", "GLUT support", "yes,shared");
+
+if (PHP_GLUT == "yes") {
+	CHECK_LIB("glut.lib", "glut", PHP_GLUT);
+	EXTENSION("glut", "php_convert.c php_glut.c", null, "-Iext/glut/libglut", "php_glut.dll");
+	AC_DEFINE("HAVE_PHP_GLUT", 1, "GLUT support");
+	ADD_FLAG("CFLAGS_GLUT", " \
+/D MSWIN32 \
+		");
+	PHP_INSTALL_HEADERS("ext/glut/", "php_convert.h  php_glut.h");
+}
