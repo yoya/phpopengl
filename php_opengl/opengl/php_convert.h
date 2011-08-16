@@ -130,7 +130,7 @@ int gl_type_size(GLenum type);
 #define IS_CALLBACK(callback, param_num) \
 	{ \
 		char *callback_name; \
-		if (!zend_is_callable(callback TSRMLS_CC, 0, &callback_name)) { \
+		if (!zend_is_callable(callback, 0, &callback_name TSRMLS_CC)) { \
 			php_error(E_WARNING, "%s() requires argument %d, '%s', to be a valid callback", \
 				get_active_function_name(TSRMLS_C), param_num, callback_name); \
 			efree(callback_name); \
