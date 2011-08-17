@@ -3779,7 +3779,7 @@ PHP_FUNCTION(glreadpixels)
         case GL_UNSIGNED_BYTE:
             break;
         default:
-            zend_error(E_ERROR,"These types are not supported (type=%d)",
+            zend_error(E_ERROR,"These types are not supported (type=%ld)",
                        Z_LVAL_P(type));
             RETURN_FALSE;
         }
@@ -3792,7 +3792,7 @@ PHP_FUNCTION(glreadpixels)
             n_per_pixel = 3;
             break;
         default:
-            zend_error(E_ERROR,"These formats are not supported (format=%d)",
+            zend_error(E_ERROR,"These formats are not supported (format=%ld)",
                        Z_LVAL_P(format));
             RETURN_FALSE;
         }
