@@ -9,7 +9,7 @@ define('MENU_STOP_RINGS',2);
 define('MENU_STOP_FADE',3);
 define('MENU_START_RINGS',4);
 define('MENU_START_FADE',5);
-define('MENU_QUIT',5);
+define('MENU_QUIT',6);
 define('NOTALLOWED',0);
 define('CONE',1);
 define('TORUS',2);
