@@ -308,6 +308,7 @@ PHP_MINIT_FUNCTION(glut)
 	//GLUT Stroke Constants
 	REGISTER_LONG_CONSTANT("GLUT_STROKE_ROMAN", (long)GLUT_STROKE_ROMAN , CONST_CS | CONST_PERSISTENT);
 	REGISTER_LONG_CONSTANT("GLUT_STROKE_MONO_ROMAN", (long)GLUT_STROKE_MONO_ROMAN , CONST_CS | CONST_PERSISTENT);
+    return SUCCESS;
 }
 
 PHP_RINIT_FUNCTION(glut)
@@ -668,7 +669,7 @@ void menu_callback(int selection)
 		return;
 	}
 	if (zend_hash_index_find(menu_callbacks, Z_LVAL_PP(z_menu_id), (void **)&z_menu_function) != SUCCESS) {
-		php_error(E_WARNING, "unknown menu callback %d", z_menu_id);
+		php_error(E_WARNING, "unknown menu callback %ld", Z_LVAL_PP(z_menu_id));
 		return;
 	}
 	MAKE_STD_ZVAL(params[0]);
