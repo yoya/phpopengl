@@ -673,7 +673,7 @@ PHP_FUNCTION(glcalllist)
 PHP_FUNCTION(glcalllists)
 {
 	zval *n, *type, *lists;
-	GLvoid *v_lists;
+	GLvoid *v_lists = NULL;
 	THREE_PARAM(n, type, lists);
 	convert_to_long(n);
 	convert_to_long(type);
@@ -2395,7 +2395,7 @@ PHP_FUNCTION(glindexmask)
 PHP_FUNCTION(glindexpointer)
 {
 	zval *type, *stride, *pointer;
-	GLvoid *v_pointer;
+	GLvoid *v_pointer = NULL;
 	THREE_PARAM(type, stride, pointer);
 	convert_to_long(type);
 	convert_to_long(stride);
@@ -3148,7 +3148,7 @@ PHP_FUNCTION(glnormal3sv)
 PHP_FUNCTION(glnormalpointer)
 {
 	zval *type, *stride, *pointer;
-	GLvoid *v_pointer;
+	GLvoid *v_pointer = NULL;
 	THREE_PARAM(type, stride, pointer);
 	convert_to_long(type);
 	convert_to_long(stride);
@@ -3767,7 +3767,6 @@ PHP_FUNCTION(glreadpixels)
 	zval *x, *y, *width, *height, *format, *type, *pixels;
 	unsigned char *v_pixels;
 	int v_pixels_len, n_per_pixel;
-        int i, j;
 	SEVEN_PARAM(x, y, width, height, format, type, pixels);
 	convert_to_long(x);
 	convert_to_long(y);
@@ -3775,32 +3774,35 @@ PHP_FUNCTION(glreadpixels)
 	convert_to_long(height);
 	convert_to_long(format);
 	convert_to_long(type);
-        switch(Z_LVAL_P(type)) {
-        case GL_UNSIGNED_BYTE:
-            break;
-        default:
-            zend_error(E_ERROR,"These types are not supported (type=%ld)",
-                       Z_LVAL_P(type));
-            RETURN_FALSE;
-        }
-        array_init(pixels);
-        switch(Z_LVAL_P(format)) {
-        case GL_RGBA:
-            n_per_pixel = 4;
-            break;
-        case GL_RGB:
-            n_per_pixel = 3;
-            break;
-        default:
-            zend_error(E_ERROR,"These formats are not supported (format=%ld)",
-                       Z_LVAL_P(format));
-            RETURN_FALSE;
-        }
-        v_pixels_len = (int)Z_LVAL_P(width) * Z_LVAL_P(height)* n_per_pixel;
-	v_pixels = emalloc(v_pixels_len);
+
+    switch(Z_LVAL_P(type)) {
+      case GL_UNSIGNED_BYTE:
+        break;
+      default:
+        zend_error(E_ERROR,"These types are not supported (type=%ld)",
+                   Z_LVAL_P(type));
+        RETURN_FALSE;
+    }
+
+    array_init(pixels);
+
+    switch(Z_LVAL_P(format)) {
+      case GL_RGBA:
+        n_per_pixel = 4;
+        break;
+      case GL_RGB:
+        n_per_pixel = 3;
+        break;
+      default:
+        zend_error(E_ERROR,"These formats are not supported (format=%ld)",
+                   Z_LVAL_P(format));
+        RETURN_FALSE;
+    }
+    v_pixels_len = (int)Z_LVAL_P(width) * Z_LVAL_P(height)* n_per_pixel;
+    v_pixels = emalloc(v_pixels_len);
 	glReadPixels((int)Z_LVAL_P(x),(int)Z_LVAL_P(y),(int)Z_LVAL_P(width),(int)Z_LVAL_P(height),(int)Z_LVAL_P(format),(int)Z_LVAL_P(type),v_pixels);
-        uchar_array_to_php_array(v_pixels, v_pixels_len, pixels);
-        efree(v_pixels);
+    uchar_array_to_php_array(v_pixels, v_pixels_len, pixels);
+    efree(v_pixels);
 }
 // }}}
 
@@ -4480,7 +4482,7 @@ PHP_FUNCTION(gltexcoord4sv)
 PHP_FUNCTION(gltexcoordpointer)
 {
 	zval *size, *type, *stride, *pointer;
-	GLvoid *v_pointer;
+	GLvoid *v_pointer = NULL;
 	FOUR_PARAM(size, type, stride, pointer);
 	convert_to_long(size);
 	convert_to_long(type);
@@ -5112,7 +5114,7 @@ PHP_FUNCTION(glvertex4sv)
 PHP_FUNCTION(glvertexpointer)
 {
 	zval *size, *type, *stride, *pointer;
-	GLvoid *v_pointer;
+	GLvoid *v_pointer = NULL;
 	FOUR_PARAM(size, type, stride, pointer);
 	convert_to_long(size);
 	convert_to_long(type);
