@@ -9,6 +9,7 @@ if (PHP_GLUT == "yes") {
 	AC_DEFINE("HAVE_PHP_GLUT", 1, "GLUT support");
 	ADD_FLAG("CFLAGS_GLUT", " \
 /D MSWIN32 \
+/MD \
 		");
 	PHP_INSTALL_HEADERS("ext/glut/", "php_convert.h  php_glut.h");
 }

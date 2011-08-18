@@ -10,6 +10,7 @@ if (PHP_OPENGL == "yes") {
 	AC_DEFINE("HAVE_PHP_OPENGL", 1, "OpenGL support");
 	ADD_FLAG("CFLAGS_OPENGL", " \
 /D MSWIN32 \
+/MD \
 		");
 	PHP_INSTALL_HEADERS("ext/opengl/", "php_convert.h  php_glu.h  php_opengl.h");
 }
