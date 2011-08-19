@@ -85,7 +85,7 @@ void gluquadric_destructor(zend_rsrc_list_entry *quad TSRMLS_DC);
 void glunurbs_destructor(zend_rsrc_list_entry *nurbs TSRMLS_DC);
 void glutesselator_destructor(zend_rsrc_list_entry *tesselator TSRMLS_DC);
 
-int glu_init(int module_number);
+int glu_init(int module_number TSRMLS_DC);
 int glu_request_init(int module_number);
 int glu_request_shutdown();
 
