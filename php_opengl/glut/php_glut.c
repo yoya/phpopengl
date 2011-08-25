@@ -831,7 +831,6 @@ void glutdisplayfunction_callback()
 PHP_FUNCTION(glutdisplayfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	HASH_CALLBACK(callback, 1, GLUT_DISPLAY_CALLBACK);
 	glutDisplayFunc((void*)glutdisplayfunction_callback);
@@ -849,7 +848,6 @@ void glutoverlaydisplayfunc_callback()
 PHP_FUNCTION(glutoverlaydisplayfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutOverlayDisplayFunc);
 	HASH_CALLBACK(callback, 1, GLUT_OVERLAY_DISPLAY_CALLBACK);
@@ -873,7 +871,6 @@ void glutreshapefunc_callback(int width,int height)
 PHP_FUNCTION(glutreshapefunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutReshapeFunc);
 	HASH_CALLBACK(callback, 1, GLUT_RESHAPE_CALLBACK);
@@ -917,7 +914,6 @@ void glutKeyboardUpFunc_callback(unsigned char key,int x,int y)
 PHP_FUNCTION(glutkeyboardfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutKeyboardFunc);
 	HASH_CALLBACK(callback, 1, GLUT_KEYBOARD_CALLBACK);
@@ -930,7 +926,6 @@ PHP_FUNCTION(glutkeyboardfunc)
 PHP_FUNCTION(glutKeyboardUpFunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutKeyboardUpFunc);
 	HASH_CALLBACK(callback, 1, GLUT_KEYBOARDUP_CALLBACK);
@@ -958,7 +953,6 @@ void glutmousefunc_callback(int button, int state, int x, int y)
 PHP_FUNCTION(glutmousefunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutMouseFunc);
 	HASH_CALLBACK(callback, 1, GLUT_MOUSE_CALLBACK);
@@ -982,7 +976,6 @@ void glutmotionfunc_callback(int x,int y)
 PHP_FUNCTION(glutmotionfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutMotionFunc);
 	HASH_CALLBACK(callback, 1, GLUT_MOTION_CALLBACK);
@@ -1006,7 +999,6 @@ void glutpassivemotionfunc_callback(int x,int y)
 PHP_FUNCTION(glutpassivemotionfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutPassiveMotionFunc);
 	HASH_CALLBACK(callback, 1, GLUT_PASSIVE_MOTION_CALLBACK);
@@ -1028,7 +1020,6 @@ void glutvisibilityfunc_callback(int state)
 PHP_FUNCTION(glutvisibilityfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutVisibilityFunc);
 	HASH_CALLBACK(callback, 1, GLUT_VISIBILITY_CALLBACK);
@@ -1050,7 +1041,6 @@ void glutentryfunc_callback(int state)
 PHP_FUNCTION(glutentryfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutEntryFunc);
 	HASH_CALLBACK(callback, 1, GLUT_ENTRY_CALLBACK);
@@ -1088,7 +1078,6 @@ void glutSpecialUpFunc_callback(int key,int x,int y)
 PHP_FUNCTION(glutspecialfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutSpecialFunc);
 	HASH_CALLBACK(callback, 1, GLUT_SPECIAL_CALLBACK);
@@ -1101,7 +1090,6 @@ PHP_FUNCTION(glutspecialfunc)
 PHP_FUNCTION(glutSpecialUpFunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutSpecialUpFunc);
 	HASH_CALLBACK(callback, 1, GLUT_SPECIALUP_CALLBACK);
@@ -1126,7 +1114,6 @@ void glutspaceballmotionfunc_callback(int x,int y,int z)
 PHP_FUNCTION(glutspaceballmotionfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutSpaceballMotionFunc);
 	HASH_CALLBACK(callback, 1, GLUT_SPACEBALLMOTION_CALLBACK);
@@ -1152,7 +1139,6 @@ void glutspaceballrotatefunc_callback(int x,int y,int z)
 PHP_FUNCTION(glutspaceballrotatefunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutSpaceballRotateFunc);
 	HASH_CALLBACK(callback, 1, GLUT_SPACEBALLROTATE_CALLBACK);
@@ -1176,7 +1162,6 @@ void glutspaceballbuttonfunc_callback(int button,int state)
 PHP_FUNCTION(glutspaceballbuttonfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutSpaceballButtonFunc);
 	HASH_CALLBACK(callback, 1, GLUT_SPACEBALLBUTTON_CALLBACK);
@@ -1200,7 +1185,6 @@ void glutbuttonboxfunc_callback(int button,int state)
 PHP_FUNCTION(glutbuttonboxfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutButtonBoxFunc);
 	HASH_CALLBACK(callback, 1, GLUT_BUTTONBOX_CALLBACK);
@@ -1224,7 +1208,6 @@ void glutdialsfunc_callback(int dial,int value)
 PHP_FUNCTION(glutdialsfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutDialsFunc);
 	HASH_CALLBACK(callback, 1, GLUT_DIALS_CALLBACK);
@@ -1248,7 +1231,6 @@ void gluttabletmotionfunc_callback(int x,int y)
 PHP_FUNCTION(gluttabletmotionfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutTabletMotionFunc);
 	HASH_CALLBACK(callback, 1, GLUT_TABLETMOTION_CALLBACK);
@@ -1276,7 +1258,6 @@ void gluttabletbuttonfunc_callback(int button,int state,int x,int y)
 PHP_FUNCTION(gluttabletbuttonfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutTabletButtonFunc);
 	HASH_CALLBACK(callback, 1, GLUT_TABLETBUTTON_CALLBACK);
@@ -1303,7 +1284,6 @@ void glutmenustatusfunc_callback(int state,int x,int y)
 PHP_FUNCTION(glutmenustatusfunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutMenuStatusFunc);
 	HASH_CALLBACK(callback, 1, GLUT_MENUSTATUS_CALLBACK);
@@ -1325,7 +1305,6 @@ void glutmenustatefunc_callback(int state)
 PHP_FUNCTION(glutmenustatefunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutMenuStateFunc);
 	HASH_CALLBACK(callback, 1, GLUT_MENUSTATE_CALLBACK);
@@ -1344,7 +1323,6 @@ void glutidlefunc_callback()
 PHP_FUNCTION(glutidlefunc)
 {
 	zval *callback;
-	char *callback_name = NULL;
 	ONE_PARAM(callback);
 	IS_NULL_CALLBACK(callback, glutIdleFunc);
 	HASH_CALLBACK(callback, 1, GLUT_IDLE_CALLBACK);
