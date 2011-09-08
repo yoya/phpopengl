@@ -120,7 +120,7 @@ static unsigned char force_ref_ninth_arg[] =
 #endif
 /* }}} */
 
-function_entry opengl_functions[] = {
+const zend_function_entry opengl_functions[] = {
 	// GL Functions
 	PHP_FE(glaccum,NULL)
 	PHP_FE(glalphafunc,NULL)

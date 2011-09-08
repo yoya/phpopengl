@@ -43,7 +43,7 @@ static HashTable *menu_callbacks = NULL;
 static HashTable *menu_entry_callbacks = NULL;
 static unsigned long unique_menu_entry_id = 0;
 
-function_entry glut_functions[] = {
+const zend_function_entry glut_functions[] = {
 	PHP_FE(glutinit,NULL)
 	PHP_FE(glutinitwindowsize,NULL)
 	PHP_FE(glutinitwindowposition,NULL)
