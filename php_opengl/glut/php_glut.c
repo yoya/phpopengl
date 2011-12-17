@@ -43,7 +43,7 @@ static HashTable *menu_callbacks = NULL;
 static HashTable *menu_entry_callbacks = NULL;
 static unsigned long unique_menu_entry_id = 0;
 
-function_entry glut_functions[] = {
+const zend_function_entry glut_functions[] = {
 	PHP_FE(glutinit,NULL)
 	PHP_FE(glutinitwindowsize,NULL)
 	PHP_FE(glutinitwindowposition,NULL)
@@ -862,9 +862,14 @@ void glutreshapefunc_callback(int width,int height)
 	zval *params[2];
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        
 	ZVAL_LONG(params[0],width);
 	ZVAL_LONG(params[1],height);
 	call_user_callback(call_backs,GLUT_RESHAPE_CALLBACK,2,params);
+	efree(params[0]);
+	efree(params[1]);
 }
 
 // {{{ bool glutreshapefunc(mixed callback)
@@ -887,12 +892,19 @@ void glutkeyboardfunc_callback(unsigned char key,int x,int y)
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
+        
 	str = (char *)emalloc(2);
 	sprintf(str,"%c",key);
 	ZVAL_STRING(params[0],str,1);
 	ZVAL_LONG(params[1],x);
 	ZVAL_LONG(params[2],y);
 	call_user_callback(call_backs,GLUT_KEYBOARD_CALLBACK,3,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
 }
 
 void glutKeyboardUpFunc_callback(unsigned char key,int x,int y)
@@ -902,12 +914,18 @@ void glutKeyboardUpFunc_callback(unsigned char key,int x,int y)
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
 	str = (char *)emalloc(2);
 	sprintf(str,"%c",key);
 	ZVAL_STRING(params[0],str,1);
 	ZVAL_LONG(params[1],x);
 	ZVAL_LONG(params[2],y);
 	call_user_callback(call_backs,GLUT_KEYBOARDUP_CALLBACK,3,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
 }
 
 // {{{ bool glutkeyboardfunc(mixed callback)
@@ -942,11 +960,20 @@ void glutmousefunc_callback(int button, int state, int x, int y)
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
 	params[3] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
+        MAKE_STD_ZVAL(params[3]);
+
 	ZVAL_LONG(params[0],button);
 	ZVAL_LONG(params[1],state);
 	ZVAL_LONG(params[2],x);
 	ZVAL_LONG(params[3],y);
 	call_user_callback(call_backs,GLUT_MOUSE_CALLBACK,4,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
+        efree(params[3]);
 }
 
 // {{{ bool glutmousefunc(mixed callback)
@@ -967,9 +994,13 @@ void glutmotionfunc_callback(int x,int y)
 	zval *params[2];
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
 	ZVAL_LONG(params[0],x);
 	ZVAL_LONG(params[1],y);
 	call_user_callback(call_backs,GLUT_MOTION_CALLBACK,2,params);
+        efree(params[0]);
+        efree(params[1]);
 }
 
 // {{{ bool glutmotionfunc(mixed callback)
@@ -990,9 +1021,13 @@ void glutpassivemotionfunc_callback(int x,int y)
 	zval *params[2];
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
 	ZVAL_LONG(params[0],x);
 	ZVAL_LONG(params[1],y);
 	call_user_callback(call_backs,GLUT_PASSIVE_MOTION_CALLBACK,2,params);
+        efree(params[0]);
+        efree(params[1]);
 }
 
 // {{{ bool glutpassivemotionfunc(mixed callback)
@@ -1012,8 +1047,10 @@ void glutvisibilityfunc_callback(int state)
 {
 	zval *params[1];
 	params[0] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
 	ZVAL_LONG(params[0],state);
 	call_user_callback(call_backs,GLUT_VISIBILITY_CALLBACK,1,params);
+        efree(params[0]);
 }
 
 // {{{ bool glutvisibilityfunc(mixed callback)
@@ -1033,8 +1070,10 @@ void glutentryfunc_callback(int state)
 {
 	zval *params[1];
 	params[0] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
 	ZVAL_LONG(params[0],state);
 	call_user_callback(call_backs,GLUT_ENTRY_CALLBACK,1,params);
+        efree(params[0]);
 }
 
 // {{{ bool glutentryfunc(mixed callback)
@@ -1056,10 +1095,16 @@ void glutspecialfunc_callback(int key,int x,int y)
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
 	ZVAL_LONG(params[0],key);
 	ZVAL_LONG(params[1],x);
 	ZVAL_LONG(params[2],y);
 	call_user_callback(call_backs,GLUT_SPECIAL_CALLBACK,3,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
 }
 
 void glutSpecialUpFunc_callback(int key,int x,int y)
@@ -1068,10 +1113,16 @@ void glutSpecialUpFunc_callback(int key,int x,int y)
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
 	ZVAL_LONG(params[0],key);
 	ZVAL_LONG(params[1],x);
 	ZVAL_LONG(params[2],y);
 	call_user_callback(call_backs,GLUT_SPECIALUP_CALLBACK,3,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
 }
 
 // {{{ bool glutspecialfunc(mixed callback)
@@ -1104,10 +1155,16 @@ void glutspaceballmotionfunc_callback(int x,int y,int z)
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
 	ZVAL_LONG(params[0],x);
 	ZVAL_LONG(params[1],y);
 	ZVAL_LONG(params[2],z);
 	call_user_callback(call_backs,GLUT_SPACEBALLMOTION_CALLBACK,3,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
 }
 
 // {{{ bool glutspaceballmotionfunc(mixed callback)
@@ -1129,10 +1186,16 @@ void glutspaceballrotatefunc_callback(int x,int y,int z)
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
 	ZVAL_LONG(params[0],x);
 	ZVAL_LONG(params[1],y);
 	ZVAL_LONG(params[2],z);
 	call_user_callback(call_backs,GLUT_SPACEBALLROTATE_CALLBACK,3,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
 }
 
 // {{{ bool glutspaceballrotatefunc(mixed callback)
@@ -1153,9 +1216,14 @@ void glutspaceballbuttonfunc_callback(int button,int state)
 	zval *params[2];
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        
 	ZVAL_LONG(params[0],button);
 	ZVAL_LONG(params[1],state);
 	call_user_callback(call_backs,GLUT_SPACEBALLBUTTON_CALLBACK,2,params);
+        efree(params[0]);
+        efree(params[1]);
 }
 
 // {{{ bool glutspaceballbuttonfunc(mixed callback)
@@ -1176,9 +1244,14 @@ void glutbuttonboxfunc_callback(int button,int state)
 	zval *params[2];
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+
 	ZVAL_LONG(params[0],button);
 	ZVAL_LONG(params[1],state);
 	call_user_callback(call_backs,GLUT_BUTTONBOX_CALLBACK,2,params);
+        efree(params[0]);
+        efree(params[1]);
 }
 
 // {{{ bool glutbuttonboxfunc(mixed callback)
@@ -1199,9 +1272,14 @@ void glutdialsfunc_callback(int dial,int value)
 	zval *params[2];
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+
 	ZVAL_LONG(params[0],dial);
 	ZVAL_LONG(params[1],value);
 	call_user_callback(call_backs,GLUT_DIALS_CALLBACK,2,params);
+        efree(params[0]);
+        efree(params[1]);
 }
 
 // {{{ bool glutdialsfunc(mixed callback)
@@ -1222,9 +1300,14 @@ void gluttabletmotionfunc_callback(int x,int y)
 	zval *params[2];
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+
 	ZVAL_LONG(params[0],x);
 	ZVAL_LONG(params[1],y);
 	call_user_callback(call_backs,GLUT_TABLETMOTION_CALLBACK,2,params);
+        efree(params[0]);
+        efree(params[1]);
 }
 
 // {{{ bool gluttabletmotionfunc(mixed callback)
@@ -1247,11 +1330,20 @@ void gluttabletbuttonfunc_callback(int button,int state,int x,int y)
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
 	params[3] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
+        MAKE_STD_ZVAL(params[3]);
+        
 	ZVAL_LONG(params[0],button);
 	ZVAL_LONG(params[1],state);
 	ZVAL_LONG(params[2],x);
 	ZVAL_LONG(params[3],y);
 	call_user_callback(call_backs,GLUT_TABLETBUTTON_CALLBACK,4,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
+        efree(params[3]);
 }
 
 // {{{ bool gluttabletbuttonfunc(mixed callback)
@@ -1274,10 +1366,17 @@ void glutmenustatusfunc_callback(int state,int x,int y)
 	params[0] = (zval *)emalloc(sizeof(zval));
 	params[1] = (zval *)emalloc(sizeof(zval));
 	params[2] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
+        MAKE_STD_ZVAL(params[1]);
+        MAKE_STD_ZVAL(params[2]);
+
 	ZVAL_LONG(params[0],state);
 	ZVAL_LONG(params[1],x);
 	ZVAL_LONG(params[2],y);
 	call_user_callback(call_backs,GLUT_MENUSTATUS_CALLBACK,3,params);
+        efree(params[0]);
+        efree(params[1]);
+        efree(params[2]);
 }
 
 // {{{ bool glutmenustatusfunc(mixed callback)
@@ -1297,8 +1396,10 @@ void glutmenustatefunc_callback(int state)
 {
 	zval *params[1];
 	params[0] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
 	ZVAL_LONG(params[0],state);
 	call_user_callback(call_backs,GLUT_MENUSTATE_CALLBACK,1,params);
+        efree(params[0]);
 }
 
 // {{{ bool glutmenustatefunc(mixed callback)
@@ -1336,8 +1437,10 @@ void gluttimerfunc_callback(int value)
 {
 	zval *params[1];
 	params[0] = (zval *)emalloc(sizeof(zval));
+        MAKE_STD_ZVAL(params[0]);
 	ZVAL_LONG(params[0],value);
 	call_user_callback(call_backs,GLUT_TIMER_CALLBACK,1,params);
+        efree(params[0]);
 }
 
 // {{{ void gluttimerfunc(long seconds, mixed callback, long value)

@@ -84,47 +84,47 @@ int gl_type_size(GLenum type);
  		WRONG_PARAM_COUNT; 
 
 #define ONE_PARAM(p) \
-	if(ZEND_NUM_ARGS() != 1 || getParameters(ht, 1, &p) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 1 || zend_parse_parameters(1 TSRMLS_CC, "z", &p) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define TWO_PARAM(p,p1) \
-	if(ZEND_NUM_ARGS() != 2 || getParameters(ht, 2, &p, &p1) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 2 || zend_parse_parameters(2 TSRMLS_CC, "zz", &p, &p1) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define THREE_PARAM(p,p1,p2) \
-	if(ZEND_NUM_ARGS() != 3 || getParameters(ht, 3, &p, &p1, &p2) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 3 || zend_parse_parameters(3 TSRMLS_CC, "zzz", &p, &p1, &p2) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define FOUR_PARAM(p,p1,p2,p4) \
-	if(ZEND_NUM_ARGS() != 4 || getParameters(ht, 4, &p, &p1, &p2, &p4) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 4 || zend_parse_parameters(4 TSRMLS_CC, "zzzz", &p, &p1, &p2, &p4) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define FIVE_PARAM(p,p1,p2,p4,p5) \
-	if(ZEND_NUM_ARGS() != 5 || getParameters(ht, 5, &p, &p1, &p2, &p4, &p5) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 5 || zend_parse_parameters(5 TSRMLS_CC, "zzzzz", &p, &p1, &p2, &p4, &p5) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define SIX_PARAM(p,p1,p2,p4,p5,p6) \
-	if(ZEND_NUM_ARGS() != 6 || getParameters(ht, 6, &p, &p1, &p2, &p4, &p5, &p6) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 6 || zend_parse_parameters(6 TSRMLS_CC, "zzzzzz", &p, &p1, &p2, &p4, &p5, &p6) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define SEVEN_PARAM(p,p1,p2,p4,p5,p6,p7) \
-	if(ZEND_NUM_ARGS() != 7 || getParameters(ht, 7, &p, &p1, &p2, &p4, &p5, &p6, &p7) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 7 || zend_parse_parameters(7 TSRMLS_CC, "zzzzzzz", &p, &p1, &p2, &p4, &p5, &p6, &p7) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define EIGHT_PARAM(p,p1,p2,p4,p5,p6,p7,p8) \
-	if(ZEND_NUM_ARGS() != 8 || getParameters(ht, 8, &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 8 || zend_parse_parameters(8 TSRMLS_CC, "zzzzzzzz", &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define NINE_PARAM(p,p1,p2,p4,p5,p6,p7,p8,p9) \
-	if(ZEND_NUM_ARGS() != 9 || getParameters(ht, 9, &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8, &p9) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 9 || zend_parse_parameters(9 TSRMLS_CC, "zzzzzzzzz", &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8, &p9) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define TEN_PARAM(p,p1,p2,p4,p5,p6,p7,p8,p9,p10) \
-	if(ZEND_NUM_ARGS() != 10 || getParameters(ht, 10, &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8, &p9, &p10) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 10 || zend_parse_parameters(10 TSRMLS_CC, "zzzzzzzzzz", &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8, &p9, &p10) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define ELEVEN_PARAM(p,p1,p2,p4,p5,p6,p7,p8,p9,p10,p11) \
-	if(ZEND_NUM_ARGS() != 11 || getParameters(ht, 11, &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8, &p9, &p10, &p11) == FAILURE) \
+	if(ZEND_NUM_ARGS() != 11 || zend_parse_parameters(11 TSRMLS_CC, "zzzzzzzzzzz", &p, &p1, &p2, &p4, &p5, &p6, &p7, &p8, &p9, &p10, &p11) == FAILURE) \
 		WRONG_PARAM_COUNT; 
 
 #define IS_CALLBACK(callback, param_num) \
