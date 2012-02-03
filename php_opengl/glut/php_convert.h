@@ -139,9 +139,12 @@ int gl_type_size(GLenum type);
 
 #define HASH_CALLBACK(callback,param_num,hash_key) \
 	{ \
+		zval *function_name; \
 		IS_CALLBACK(callback,param_num); \
-		zval_add_ref(&callback); \
-		zend_hash_index_update(call_backs, hash_key, callback, sizeof(zval), NULL); \
+		if(zend_hash_index_find(call_backs, hash_key,(void **)&function_name) != SUCCESS) { \
+			zval_add_ref(&callback); \
+	        	zend_hash_index_update(call_backs, hash_key, callback, sizeof(zval), NULL); \
+		}  \
 	}
 
 #define HASH_MENU_CALLBACK(callback,param_num,menu_id) \
