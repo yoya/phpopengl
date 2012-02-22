@@ -6068,6 +6068,9 @@ PHP_MINIT_FUNCTION(opengl)
 #endif
 	glu_init(module_number TSRMLS_CC);
 
+#ifdef PHP_OPENGL_OSMESA
+	osmesa_init(module_number);
+#endif
 	return SUCCESS;
 }
 
@@ -6076,9 +6079,6 @@ PHP_RINIT_FUNCTION(opengl)
 	// initialize other modules
 	glu_request_init(module_number);
 
-#ifdef PHP_OPENGL_OSMESA
-	osmesa_init(module_number);
-#endif
 	return SUCCESS;
 }
 
