@@ -1264,7 +1264,7 @@ PHP_FUNCTION(glcolorpointer)
 		break;
 	}
 	glColorPointer((int)Z_LVAL_P(size),(int)Z_LVAL_P(type),(int)Z_LVAL_P(stride),v_pointer);
-	efree(v_pointer); // yoya
+	//	efree(v_pointer); // don't free v_pointer now.
 }
 // }}}
 
@@ -5136,7 +5136,7 @@ PHP_FUNCTION(glvertexpointer)
 		break;
 	}
 	glVertexPointer((int)Z_LVAL_P(size),(int)Z_LVAL_P(type),(int)Z_LVAL_P(stride),v_pointer);
-	efree(v_pointer);
+	//	efree(v_pointer); // don't free v_pointer now.
 }
 // }}}
 
