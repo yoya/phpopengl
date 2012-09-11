@@ -49,6 +49,7 @@ function display() {
 }
 
 function title() {
+    global $argv;
     return $argv[0];
 }
 
@@ -70,6 +71,7 @@ function keyboard($key, $x, $y) {
 }
 
 function ex_() {
+    global $argv;
     glutInit($argv);
     glutInitDisplayMode(GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(250, 250);
