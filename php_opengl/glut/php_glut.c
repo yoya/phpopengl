@@ -37,6 +37,8 @@
 #include "php_glut.h"
 #include "php_convert.h"
 
+#define PHPGLUT_VERSION "0.0.3" // update with PHPOpenGL
+
 static HashTable *call_backs = NULL;
 
 static HashTable *menu_callbacks = NULL;
@@ -151,7 +153,7 @@ zend_module_entry glut_module_entry = {
 	PHP_RSHUTDOWN(glut),
 	PHP_MINFO(glut),
 #if ZEND_MODULE_API_NO >= 20010901
-	NO_VERSION_YET,
+	PHPGLUT_VERSION,
 #endif
 	STANDARD_MODULE_PROPERTIES
 };
@@ -340,7 +342,11 @@ PHP_MSHUTDOWN_FUNCTION(glut)
 
 PHP_MINFO_FUNCTION(glut)
 {
-	php_printf("GLUT support enabled");
+    php_info_print_table_start();
+    php_info_print_table_header(2, "GLUT support", "enabled");
+    php_info_print_table_row(2, "PHPGLUT version", PHPGLUT_VERSION);
+    php_info_print_table_end();
+
 }
 
 // GLUT Init Functions

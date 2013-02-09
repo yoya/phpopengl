@@ -46,6 +46,8 @@
 #include "php_osmesa.h"
 #endif
 
+#define PHPOPENGL_VERSION "0.0.3" // update with PHPGLUT
+
 char *glget_mask = NULL;
 unsigned int glget_max = 0;
 
@@ -545,7 +547,7 @@ zend_module_entry opengl_module_entry = {
 	PHP_RSHUTDOWN(opengl),
 	PHP_MINFO(opengl),
 #if ZEND_MODULE_API_NO >= 20010901
-	NO_VERSION_YET,
+	PHPOPENGL_VERSION, // PHPOpenGL/GLUT Version
 #endif
 	STANDARD_MODULE_PROPERTIES,
 };
@@ -556,7 +558,10 @@ ZEND_GET_MODULE(opengl)
 
 PHP_MINFO_FUNCTION(opengl)
 {
-	php_printf("OpenGL support enabled");
+    php_info_print_table_start();
+    php_info_print_table_header(2, "OpenGL support", "enabled");
+    php_info_print_table_row(2, "PHPOpenGL version", PHPOPENGL_VERSION);
+    php_info_print_table_end();
 }
 
 typedef struct _efree_node_t {
